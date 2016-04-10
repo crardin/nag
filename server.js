@@ -17,9 +17,15 @@ var passport = require("passport");
 var LocalStrategy = require('passport-local').Strategy;
 var TwitterStrategy = require('passport-twitter').Strategy;
 
-var users = [
+/*var users = [
     { id: 1, username: 'guest', password: 'guestpass', email: 'guest@anne.com' },
     { id: 2, username: 'visitor', password: 'visitorpass', email: 'visitor@anne.com' }
+];*/
+
+var users = [
+    { id: 1, username: 'Karen', password: 'B0hr!sBorin8', email: 'karen@anne.com' },
+    { id: 2, username: 'David', password: 'B0hr!sBorin8', email: 'david@anne.com' },
+    { id: 3, username: 'Admin', password: 'B0hr!sBorin8', email: 'admin@anne.com' }
 ];
 
 
