@@ -22,9 +22,8 @@
         }
     }]);
 
-
     app.directive('ccSidebar', function () {
-        // Opens and clsoes the sidebar menu.
+        // Opens and closes the sidebar menu.
         // Usage:
         //  <div data-cc-sidebar>
         // Creates:
@@ -200,34 +199,86 @@
         }
     });
 
+    app.directive('btstAccordion', function() {
+       var directive = {
+           restrict: 'E',
+           transclude: true,
+           replace: true,
+           scope: {},
+           templateUrl: '/app/layout/btstAccordion.html',
+           link: function(scope, element, attrs){
+               // give this element a unique id
+               var id = element.attr("id");
+               if (!id) {
+                   id = "btst-acc" + scope.$id;
+                   element.attr("id", id);
+               }
+
+               // set data-parent on accordion-toggle element
+               var arr = element.find(".accordion-toggle");
+               for (var i = 0; i < arr.length; i++){
+                   $(arr[i]).attr("data-parent", "#" + id);
+                   $(arr[i]).attr("href", "#" + id + "collapse" + i);
+               }
+               arr = element.find(".accordion-body");
+               $(arr[0]).addClass("in"); // expand first pane
+               for (var i = 0; i < arr.length; i++){
+                   $(arr[i]).attr("id", id + "collapse" + i);
+               }
+           },
+           controller: function() {}
+       };
+       return directive;
+    });
+
+    app.directive("btstPane", function() {
+        var directive = {
+            require: "^btstAccordion",
+            restrict: "E",
+            transclude: true,
+            replace: true,
+            scope: {
+                title: "@",
+                category: "=",
+                order: "="
+            },
+            templateUrl: '/app/layout/btstAccordionPane.html',
+            link: function(scope, element, attrs){
+                scope.$watch("title", function(){
+                   // note: this requires jQuery
+                   var hdr = element.find(".accordion-toggle");
+                   hdr.html(scope.title);
+                });
+            }
+        };
+        return directive;
+    });
 
 
-
-   
-app.directive('checklistModel', ['$parse', '$compile', function($parse, $compile) {
-  // contains
-  function contains(arr, item) {
-    if (angular.isArray(arr)) {
-      for (var i = 0; i < arr.length; i++) {
-        if (angular.equals(arr[i], item)) {
-          return true;
+    app.directive('checklistModel', ['$parse', '$compile', function($parse, $compile) {
+        // contains
+        function contains(arr, item) {
+            if (angular.isArray(arr)) {
+                for (var i = 0; i < arr.length; i++) {
+                    if (angular.equals(arr[i], item)) {
+                        return true;
+                    }
+                }
+            }
+            return false;
         }
-      }
-    }
-    return false;
-  }
 
-  // add
-  function add(arr, item) {
-    arr = angular.isArray(arr) ? arr : [];
-    for (var i = 0; i < arr.length; i++) {
-      if (angular.equals(arr[i], item)) {
-        return arr;
-      }
-    }
-    arr.push(item);
-    return arr;
-  }
+        // add
+        function add(arr, item) {
+            arr = angular.isArray(arr) ? arr : [];
+            for (var i = 0; i < arr.length; i++) {
+                if (angular.equals(arr[i], item)) {
+                    return arr;
+                }
+            }
+            arr.push(item);
+            return arr;
+        }
 
   // remove
   function remove(arr, item) {
