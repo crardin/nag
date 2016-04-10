@@ -1,0 +1,54 @@
+<section class="mainbar" data-ng-controller="NAGCentral as vm">
+    <section class="matter">
+        <div class="container">
+            <div class="row">
+                <div class="widget wviolet">
+                    <div data-cc-widget-header title="{{vm.title}}"></div>
+                    <div class="widget-content">
+                        <div class="row">
+                            <form class="form-horizontal" role="form">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <input type="text" class="form-control" placeholder="Search" data-ng-model="vm.searchParameter">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group">
+                                    <button class="btn btn-info" data-ng-click="vm.search()"><i class="fa fa-question"></i>Search</button>
+                                </div>
+                            </div>
+                            <div class="form-group" ng-show="vm.nodes">
+                                <div class="col-md-8">
+                                    <h3>Search Results</h3>
+                                    <ul>
+                                        <!--li data-ng-repeat="node in vm.nodes | filter: json">{{node}}</li-->
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-12">
+                                    <h3>Tasks</h3>
+                                    <div class="gridStyle" ng-grid="vm.taskOptions"></div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-12">
+                                    <h3>Ongoing Trial Sites</h3>
+                                    <div class="gridStyle" ng-grid="vm.trialOptions"></div>
+                                </div>
+                            </div>
+
+                            </form>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="widget-foot">
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+        </div>
+
+    </section>
+</section>
+

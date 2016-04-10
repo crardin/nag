@@ -1,0 +1,97 @@
+<section class="mainbar" data-ng-controller="Study as vm">
+    <section class="matter">
+        <div class="container">
+            <div class="row">
+                <div class="widget wviolet">
+                    <div data-cc-widget-header title="{{vm.title}}"></div>
+                    <div class="widget-content">
+                        <div class="row">
+                            <form class="form-horizontal" role="form">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" placeholder="Search" data-ng-model="vm.searchParameter">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group">
+                                        <button class="btn btn-info" data-ng-click="vm.search()"><i class="fa fa-question"></i>Search</button>
+                                    </div>
+                                </div>
+                                <div class="form-group" ng-show="vm.nodes">
+                                    <div class="col-md-8">
+                                        <h3>Search Results</h3>
+                                        <ul>
+                                            <!--li data-ng-repeat="node in vm.nodes | filter: json">{{node}}</li-->
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="form-group" >
+                                    <div class="col-md-12">
+                                        <h3>List of Studies</h3>
+                                        <div class="gridStyle" ng-grid="vm.studyOptions"></div>
+                                        <!--table class="table">
+                                            <tr class="headerRow">
+                                                <th>Sponsor</th>
+                                                <th>Study ID</th>
+                                                <th>Study Name</th>
+                                                <th>Processing Quarter</th>
+                                                <th>Status</th>
+                                            </tr>
+                                            <tr ng-repeat="node in vm.studynodes" ng-show="vm.studyId">
+                                                <td>{{node.Sponsor}}</td>
+                                                <td ng-click="vm.showTrials(vm.studyId)"><b>{{vm.studyId}}</b></td>
+                                                <td>{{node.Study_Name}}</td>
+                                                <td>{{node.Processing_Quarter}}</td>
+                                                <td>{{node.Status}}</td>
+                                            </tr>
+                                            <tr ng-repeat="node in vm.studynodes" ng-show="!vm.studyId">
+                                                <td>{{node.Sponsor}}</td>
+                                                <td ng-click="vm.showTrials(node.Study_ID)"><b>{{node.Study_ID}}</b></td>
+                                                <td>{{node.Study_Name}}</td>
+                                                <td>{{node.Processing_Quarter}}</td>
+                                                <td>{{node.Status}}</td>
+                                            </tr>
+                                        </table-->
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-md-12">
+                                        <h3>Trials</h3>
+                                        <div class="gridStyle" ng-grid="vm.trialOptions"></div>
+                                        <!--table class="table">
+                                            <tr class="headerRow">
+                                                <th>Sponsor</th>
+                                                <th>Study</th>
+                                                <th>Trial/Facility</th>
+                                                <th>Principle Investigator</th>
+                                                <th>Stage</th>
+                                                <th>Contacted</th>
+                                                <th>No. Subjects</th>
+                                            </tr>
+                                            <tr ng-repeat="node in vm.trialnodes">
+                                                <td>{{node.Sponsor}}</td>
+                                                <td>{{node.Study_ID}}</td>
+                                                <td>{{node.TrialSite_ID}}/{{node.Facility_Name}}</td>
+                                                <td><a href="#/admin/Principal/LastName/{{node.LastName}}/FirstName/{{node.FirstName}}/TrialSiteId/{{node.TrialSite_ID}}">{{node.LastName}}, {{node.FirstName}}</a></td>
+                                                <td>{{node.Stage}}</td>
+                                                <td>{{node.Contacted}}</td>
+                                                <td>{{node.NumberOfSubjects}}</td>
+                                            </tr>
+                                        </table-->
+                                    </div>
+                                </div>
+
+                            </form>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="widget-foot">
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+        </div>
+
+    </section>
+</section>
+

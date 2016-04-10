@@ -3,30 +3,30 @@
         <div class="container">
             <div class="row">
                 <div class="widget wblue">
-                    <div data-cc-widget-header title="Manage Drugs"
-                         allow-collapse="true"></div>
+                    <div data-cc-widget-header title="Test Subjects"
+                         allow-collapse="false"></div>
                     <div class="widget-content">
-                        <div class="row">
+                        <div-- class="row">
                             <div class="col-md-6">
-                                <h4>Add a Drug</h4>
+                                <h4>Find the Trial Site</h4>
                                  <form class="form-horizontal" role="form">
                                      <div class="form-group">
                                          <label  class="control-label">Name:</label>
-                                         <input type="text" class="form-control" placeholder="Enter Drug Name"   data-ng-model="vm.newDrugName">
+                                         <input type="text" class="form-control" placeholder="Study ID, Site ID, or Place Name"   data-ng-model="vm.searchParameter">
                                      </div>
-                                     <div class="form-group">
+                                     <!--div class="form-group">
                                           <label  class="control-label">Description:</label>
                                          <textarea class="form-control" rows="3" placeholder="Drug Description" ng-model="vm.newDrugDescription"></textarea>
                                          
-                                     </div>
+                                     </div-->
                                       <div class="form-group">
-                                          <button class="btn btn-info" data-ng-click="vm.addDrug()"><i class="fa fa-pencil-square"></i>Add</button>
+                                          <button class="btn btn-info" data-ng-click="vm.getTestSite()"><i class="fa fa-pencil-square"></i>Search</button>
                                       </div>
                                  </form>
                                
                             </div>
 
-                            <div class="col-md-6">
+                            <!--div class="col-md-6">
                                 <h4>Delete a Drug</h4>
                                 <form class="form-horizontal" role="form">
                                      <div class="form-group">
@@ -40,7 +40,7 @@
                                  </form>
                                
 <!--                               {{vm.drugs}} -- {{vm.selectedDrugForDelete}}-->
-                            </div>
+                            </div-->
                         </div>
                     </div>
                 </div>
@@ -52,9 +52,30 @@
 
     </section>
 
+    <!-- Results section -->
+    <section class="matter">
+        <div class="container">
+            <div class="row">
+                <div class="widget wgreen">
+                    <div data-cc-widget-header title="Search Results"
+                         allow-collapse="true"></div>
+                    <div class="widget-content">
+                        <div class="row">
+                            <div class="col-md-8">
+                                <ul>
+                                    <li>some data</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Relationship section -->
 
-    <section class="matter">
+    <!--section class="matter">
         <div class="container">
             <div class="row">
                 <div class="widget wgreen">
@@ -115,5 +136,5 @@
             </div>
         </div>
 
-    </section>
+    </section-->
 </section>

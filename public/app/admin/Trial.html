@@ -1,0 +1,405 @@
+<section class="mainbar" data-ng-controller="Trial as vm">
+    <section class="matter">
+        <div class="container">
+            <div class="row">
+                <div class="widget wviolet">
+                    <div data-cc-widget-header title="{{vm.trial.Sponsor}}"></div>
+                    <div class="widget-content">
+                        <h5><b>Study ID: {{vm.studyId}}</b> {{vm.trial.Name}}</h5>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <div class="information">
+                                        <h5>Site ID: {{vm.trial.ID}}</h5>
+                                        <h5>{{vm.facility.name}}</h5>
+                                        <div>Telephone {{vm.facility.phone | tel}}</div>
+                                        <div>Fax {{vm.facility.fax | tel}}</div>
+                                        <h5>Principal Investigator</h5>
+                                        <div>
+                                            <a href="#/admin/Principal/LastName/{{vm.principalInvestigator.LastName}}/FirstName/{{vm.principalInvestigator.FirstName}}/TrialSiteId/{{vm.trialId}}">{{vm.principalInvestigator.Name}}</a>
+                                        </div>
+                                        <div class="address">
+                                            {{vm.principalInvestigator.Address}}
+                                            {{vm.principalInvestigator.City}},{{vm.principalInvestigator.State}}
+                                            {{vm.principalInvestigator.Zip}}
+                                        </div>
+                                    </div>
+                                    <div class="information">
+                                        <div>Telephone {{vm.principalInvestigator.PhoneNumber | tel}}</div>
+                                        <div>Fax {{vm.principalInvestigator.FaxNumber | tel}}</div>
+                                        <div>Email {{vm.principalInvestigator.Email}}</div>
+                                    </div>
+                                    <div class="information">
+                                        <div><span class="bold">Trial Status</span> {{vm.trial.Status}}</div>
+                                        <div><span class="bold">Stage</span> {{vm.trial.Stage}}</div>
+                                        <div>
+                                            <a href="#/admin/TestSubjects/Study/{{vm.studyId}}/TrialSiteId/{{vm.trialId}}">Number Of Subjects {{vm.trial.NumberOfSubjects || 'None'}}</a>
+                                        </div>
+                                        <div>
+                                            <a ng-click="vm.showTaskInfo(vm.trial.TaskNumber)">Task Number
+                                            {{vm.trial.TaskNumber || 'None Assigned'}}</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <h5>Primary Contact</h5>
+                                    <table class="table">
+                                        <tr class="headerRow">
+                                            <th>Name</th>
+                                            <th>Title</th>
+                                            <th>Phone</th>
+                                            <th>Email</th>
+                                        </tr>
+                                        <tr data-toggle="modal" data-target="#myModal" ng-click="vm.fillContactForm()">
+                                            <td>{{vm.primaryContact.Name}}</td>
+                                            <td>{{vm.primaryContact.Title}}</td>
+                                            <td>{{vm.primaryContact.PhoneNumber | tel}}</td>
+                                            <td>{{vm.primaryContact.Email}}</td>
+                                        </tr>
+                                    </table>
+                                    <h5>Alternate Contacts</h5>
+                                    <table class="table">
+                                        <tr class="headerRow">
+                                            <th>Name</th>
+                                            <th>Title</th>
+                                            <th>Phone</th>
+                                            <th>Email</th>
+                                        </tr>
+                                        <tr ng-repeat="node in vm.contacts" data-toggle="modal" data-target="#myModal" ng-click="vm.fillAlternateContactForm(node)">
+                                            <td>
+                                                {{node.Contact_FirstName}} {{node.Contact_LastName}}
+                                            </td>
+                                            <td>{{node.Contact_Title}}</td>
+                                            <td>{{node.Contact_TelephoneNumber | tel}}</td>
+                                            <td>{{node.Contact_EmailAddress}}</td>
+                                        </tr>
+                                    </table>
+                                    <button class="btn btn-success" data-toggle="modal" data-target="#myModal" ng-click="vm.newContactForm()">Add
+                                        Contact
+                                    </button>
+                                    <div id="myModal" class="modal fade" role="dialog">
+                                        <div class="modal-dialog">
+
+                                            <!-- Modal content-->
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <button type="button" class="close"
+                                                            data-dismiss="modal">&times;</button>
+                                                    <h4 class="modal-title">Add a Contact</h4>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <form class="form" role="form">
+                                                        <button type="button" class="btn btn-success"
+                                                                ng-click="vm.importContacts()"
+                                                                data-toggle="modal" data-target="#ImportContacts" data-dismiss="modal">Import
+                                                        </button>
+                                                        <div class="form-group form-group-sm">
+                                                            <label class="control-label">Title</label>
+                                                            <input class="form-control input-sm" type="text"
+                                                                   ng-model="vm.contact.Title"/>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label class="control-label">First Name</label>
+                                                            <input class="form-control input-sm" type="text"
+                                                                   ng-model="vm.contact.FirstName"/>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label class="control-label">Last Name</label>
+                                                            <input class="form-control input-sm" type="text"
+                                                                   ng-model="vm.contact.LastName"/>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label class="control-label">Contact Type</label>
+                                                            <select ng-model="vm.contact.Type"
+                                                                    class="form-control input-sm">
+                                                                <option value="Primary">Primary</option>
+                                                                <option value="Alternate">Alternate</option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label class="control-label">Department</label>
+                                                            <input class="form-control input-sm" type="text"
+                                                                   ng-model="vm.contact.Department"/>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label class="control-label">Contact Email</label>
+                                                            <input class="form-control input-sm" type="text"
+                                                                   ng-model="vm.contact.Email"/>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label class="control-label">Contact Phone</label>
+                                                            <input class="form-control input-sm" type="text"
+                                                                   ng-model="vm.contact.PhoneNumber"/>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label class="control-label">Contact Fax</label>
+                                                            <input class="form-control input-sm" type="text"
+                                                                   ng-model="vm.contact.Fax"/>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button class="btn btn-success"
+                                                            data-ng-click="vm.addContact()" data-dismiss="modal" style="margin-bottom:0;">Save
+                                                    </button>
+                                                    <button class="btn btn-success" data-dismiss="modal">
+                                                        Close
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div id="ImportContacts" class="modal fade" role="dialog">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                            <div class="modal-header">
+                                                <button type="button" class="close"
+                                                        data-dismiss="modal">&times;</button>
+                                                <h4 class="modal-title">Import Contacts</h4>
+                                            </div>
+                                            <div class="modal-body">
+                                                <form class="form" role="form">
+                                                    <table class="table">
+                                                        <tr class="headerRow">
+                                                            <th>Contact Type</th>
+                                                            <th>PI Name</th>
+                                                            <th>Contact Name</th>
+                                                            <th>Title</th>
+                                                            <th>Phone</th>
+                                                            <th>Email</th>
+                                                        </tr>
+                                                        <tr ng-repeat="node in vm.importedContacts">
+                                                            <td>
+                                                                <input type="checkbox" data-model="vm.primaryFlag" />
+                                                            </td>
+                                                            <td>{{vm.firstname}} {{vm.lastname}}</td>
+                                                            <td>{{node.Contact_FirstName}} {{node.Contact_LastName}}</td>
+                                                            <td>{{node.Contact_Title}}</td>
+                                                            <td>{{node.Contact_TelephoneNumber | tel}}</td>
+                                                            <td>{{node.Contact_EmailAddress}}</td>
+                                                            <td></td>
+                                                            <td></td>
+                                                        </tr>
+                                                    </table>
+                                                </form>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button class="btn btn-success" data-ng-click="vm.saveImports()" style="margin-bottom:0;" data-dismiss="modal">
+                                                    Save
+                                                </button>
+                                                <button class="btn btn-success" data-dismiss="modal">
+                                                    Close
+                                                </button>
+                                            </div>
+                                        </div>
+                                        </div>
+                                    </div>
+                                    <!--button class="btn btn-success" data-ng-click="vm.removeContact()">Remove Contact
+                                    </button-->
+                                </div>
+                                <div class="form-group fa-border">
+                                    <div class="information">
+                                        <h6>Quarter</h6>
+                                        <h6>File Received</h6>
+                                        <h6>Assigned To</h6>
+                                    </div>
+                                    <div class="information">
+                                        <h6>Files</h6>
+                                        <ul>
+
+                                        </ul>
+                                        <input type="file"/>
+                                        <button class="btn btn-success" data-ng-click="vm.uploadFiles()">Upload Files
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row form-group fa-border" ng-show="vm.showTask">
+
+                            <div class="form-group">
+                                <div class="col-md-12">
+                                    <div class="col-md-6">
+                                        <h5>Important Notes</h5>
+                                        <textarea class="form-control" rows=5
+                                                  ng-model="vm.TaskImportantNotes"></textarea>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <h5>Associated Trials</h5>
+                                        <table class="table">
+                                            <tr class="headerRow">
+                                                <th>Study</th>
+                                                <th>Site</th>
+                                                <th>Stage</th>
+                                            </tr>
+                                            <tr ng-repeat="node in vm.Task.AssociatedTrials">
+                                                <td><a href="#/admin/Study/{{node.Study_ID}}">{{node.Study_ID}}</a></td>
+                                                <td>
+                                                    <a href="#/admin/Trial/TrialId/{{node.TrialSite_ID}}/LastName/{{vm.lastname}}/FirstName/{{vm.firstname}}/StudyId/{{vm.studyId}}">{{node.TrialSite_ID}}</a>
+                                                </td>
+                                                <td>
+                                                    <select class="form-control input-sm"
+                                                            ng-model="node.TrialSite_Stage" ng-change="vm.updateTrialStatus(node)">
+                                                        <option value="Needs Analysis">Needs Analysis</option>
+                                                        <option value="Closed Won">Closed Won</option>
+                                                        <option value="Closed Lost">Closed Lost</option>
+                                                        <option value="Refused PI">Refused PI</option>
+                                                        <option value="Refused Legal Dept">Refused Legal Dept</option>
+                                                    </select>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <h5>Attempts
+                                                <span ng-bind="vm.taskAttempt">{{ vm.taskAttempt }}</span>
+                                            </h5>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <h5>History</h5>
+                                            <div class="gridStyle" ng-grid="vm.historyOptions"></div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <h5>Update Task</h5>
+                                        <label>Subject
+                                            <input class="form-control input-sm" type="text"
+                                                   ng-model="vm.Task.Subject"/>
+                                        </label><br/>
+                                        <label>Task Notes</label><br/>
+                                        <textarea class="form-control" ng-model="vm.Task.Notes"></textarea>
+                                        <div class="row">
+
+                                            <div class="col-md-4">
+                                                <label>Contact Type
+                                                    <select class="form-control input-sm"
+                                                            ng-model="vm.Task.ContactType">
+                                                        <option value="Call">Call</option>
+                                                        <option value="Fax">Sent a Fax</option>
+                                                        <option value="Email">Sent an Email</option>
+                                                        <option value="Letter">Sent a Letter</option>
+                                                        <option value="Other">Other</option>
+                                                    </select>
+                                                </label>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <label>Status
+                                                    <select class="form-control input-sm"
+                                                            ng-model="vm.Task.Status">
+                                                        <option value="Not Started">Not Started</option>
+                                                        <option value="In Progress">In Progress</option>
+                                                        <option value="Closed">Completed</option>
+                                                        <option value="Waiting on someone else">Waiting On Someone Else</option>
+                                                        <option value="Deferred">Deferred</option>
+                                                    </select>
+                                                </label>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <label>AM/PM</label><br/>
+                                                <select ng-model="vm.Task.AMPM">
+                                                    <option value="AM">AM</option>
+                                                    <option value="PM">PM</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <label>Priority</label><br/>
+                                                <select ng-model="vm.Task.Priority">
+                                                    <option value="Low">Low</option>
+                                                    <option value="Medium">Medium</option>
+                                                    <option value="High">High</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <label>Reminder Date</label><br/>
+                                                <input type="date" ng-model="vm.Task.ReminderDate" ng-change="vm.setReminderDateFlag()" />
+                                            </div>
+                                            <div class="col-md-2">
+                                                <label>Reminder Set</label><br/>
+                                                <input type="checkbox" ng-true-value="Yes" ng-false-value="No" ng-model="vm.Task.ReminderSet"/>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <label>Close Task</label><br />
+                                                <input type="checkbox" ng-model="vm.addTaskFlag" ng-change="vm.checkTrials()"/>
+                                                <div ng-hide="!vm.showWarning" class="text-danger">Trials Still in the Needs Analysis Stage</div>
+                                            </div>
+                                            <!--div class="col-md-4">
+                                                <!--label>Close/Delete Task</label><br/>
+                                                <label>Close</label>
+                                                <input type="radio" ng-model="vm.Task.CloseFlag" value="false"/>
+                                                <label>Delete</label>
+                                                <input type="radio" ng-model="vm.Task.CloseFlag" value="true">
+                                            </div-->
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <h5>Task Contact</h5>
+                                        <table class="table">
+                                            <tr class="headerRow">
+                                                <th>Name</th>
+                                                <th>Title</th>
+                                                <th>Email</th>
+                                                <th>Phone</th>
+                                                <th>Fax</th>
+                                            </tr>
+                                            <tr>
+                                                <td>{{vm.taskContact.Name}}</td>
+                                                <td>{{vm.taskContact.Title}}</td>
+                                                <td>{{vm.taskContact.Email}}</td>
+                                                <td>{{vm.taskContact.PhoneNumber | tel}}</td>
+                                                <td>{{vm.taskContact.Fax | tel}}</td>
+                                            </tr>
+                                        </table>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label>Preferred Contact Method</label><br/>
+                                                <label>Email</label>
+                                                <input type="radio" ng-model="vm.taskContact.contactMethod"
+                                                       value="email"/>
+                                                <label>Fax</label>
+                                                <input type="radio" ng-model="vm.taskContact.contactMethod"
+                                                       value="fax"/>
+                                                <label>Phone</label>
+                                                <input type="radio" ng-model="vm.taskContact.contactMethod"
+                                                       value="phone"/>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <label>New Task Contact</label><br/>
+                                                <select ng-model="vm.selectedTaskContact" ng-change="vm.updateTaskContact()">
+                                                    <option ng-repeat="node in vm.contacts" value="{{node.Contact_FirstName}} {{node.Contact_LastName}}">{{node.Contact_FirstName}} {{node.Contact_LastName}}</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <button type="button" class="btn btn-success"
+                                                        data-ng-click="vm.clearTaskForm()">Cancel
+                                                </button>
+                                                <button type="button" class="btn btn-success"
+                                                        data-ng-click="vm.saveTask()">Save
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="widget-foot">
+                <div class="clearfix"></div>
+            </div>
+        </div>
+        </div>
+
+    </section>
+</section>
+

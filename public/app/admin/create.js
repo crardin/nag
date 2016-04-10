@@ -22,12 +22,11 @@
 
         // Our event handlers
         vm.addDrug = addDrug;
+        vm.getTestSite = getTestSite;
         vm.listAllDrugs =listAllDrugs;
         vm.deleteDrug = deleteDrug;
         vm.addRelationship = addRelationship;
         vm.deleteRelationship = deleteRelationship;
-       
-        
 
         // Call this function when our controller is loaded
         activate();
@@ -57,7 +56,15 @@
                 return vm.relationships =  result.data.responseData;
             });
         }
-  
+
+        // search for a test site by study id, site id, or place name
+        function getTestSite() {
+            // get the input data
+            log(vm.searchParameter);
+            // determine if it's a study id, site id, or place name
+            return;
+        }
+
         // Add a drug node
         function addDrug() {
             if (vm.newDrugName==undefined)

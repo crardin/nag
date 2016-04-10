@@ -1,0 +1,85 @@
+<section class="mainbar" data-ng-controller="Principal as vm">
+    <section class="matter">
+        <div class="container">
+            <div class="row">
+                <div class="widget wblue">
+                    <div data-cc-widget-header title="{{vm.title}}"></div>
+                    <div class="widget-content">
+                        <div class="row">
+                            <form class="form-horizontal" role="form">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" placeholder="Search" data-ng-model="vm.searchParameter">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <button class="btn btn-info" data-ng-click="vm.search()"><i class="fa fa-question"></i>Search</button>
+                                    </div>
+                                </div>
+                                <div class="form-group" ng-show="vm.nodes">
+                                    <div class="col-md-12">
+                                        <h3>Search Results</h3>
+                                        <ul>
+                                            <!--li data-ng-repeat="node in vm.nodes | filter: json">{{node}}</li-->
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-md-12" ng-repeat="node in vm.investigatornodes">
+                                        <h3>Principal Investigator</h3>
+                                        <div class="col-md-6">
+                                            <div>{{node.FirstName}} {{node.LastName}}</div>
+                                            <div>{{node.StreetAddress}}</div>
+                                            <div>{{node.City}}, {{node.State}} {{node.Zip}}</div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div>Telephone Number {{node.TelephoneNumber | tel}}</div>
+                                            <div>Fax Number {{node.FaxNumber | tel}}</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-md-12">
+                                        <h3>Trials</h3>
+                                        <div class="gridStyle" ng-grid="vm.trialOptions"></div>
+                                        <button class="btn btn-info" data-ng-click="vm.createTask()">Create Task</button>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-md-12">
+                                        <h3>Manage Task Assignments</h3>
+                                        <div class="gridStyle" ng-grid="vm.taskOptions"></div>
+                                        <!--table class="table">
+                                            <tr class="headerRow">
+                                                <th></th>
+                                                <th>Task</th>
+                                                <th>Study</th>
+                                                <th>Site</th>
+                                            </tr>
+                                            <tr ng-repeat="node in vm.taskassignmentnodes">
+                                                <td><input type="radio" ng-model="vm.currenttask" value="{{node.TrialSite_ID}}" ng-click="vm.updateSelectedTask(node.Task_Number)"/></td>
+                                                <td>{{node.Task_Number}}</td>
+                                                <td><a href="#/admin/Study/{{node.Study_ID}}">{{node.Study_ID}}</a></td>
+                                                <td><a href="#/admin/Trial/TrialId/{{node.TrialSite_ID}}/LastName/{{vm.lastname}}/FirstName/{{vm.firstname}}/StudyId/{{node.Study_ID}}">{{node.TrialSite_ID}}</a></td>
+                                            </tr>
+                                        </table-->
+                                        <button class="btn btn-info" data-ng-click="vm.removeTrial()">Remove Trial</button>
+                                        <button class="btn btn-info" data-ng-click="vm.removeTask()">Remove Task</button>
+                                    </div>
+                                </div>
+
+                            </form>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="widget-foot">
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+        </div>
+
+    </section>
+</section>
+

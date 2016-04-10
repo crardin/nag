@@ -1,0 +1,55 @@
+<section class="mainbar" data-ng-controller="FileManager as vm">
+    <section class="matter">
+        <div class="container">
+            <div class="row">
+                <div class="widget wviolet">
+                    <div data-cc-widget-header title="{{vm.title}}"></div>
+                    <div class="widget-content">
+                        <div class="row">
+                            <form class="form-horizontal" role="form">
+                                <div class="form-group">
+                                    <button class="btn btn-info" data-ng-click="vm.chooseFile()"><i class="fa fa-file"></i>Choose File</button>
+                                    <button class="btn btn-info" data-ng-click="vm.uploadFile()"><i class="fa fa-file-o"></i>Upload File</button>
+                                </div>
+
+                                <div class="form-group">
+                                    <div data-cc-widget-header title="Files That Have Completed Processing"
+                                         allow-collapse="true"></div>
+                                    <div class="widget-content">
+                                        <ul>
+                                            <li>some data</li>
+                                        </ul>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div data-cc-widget-header title="Files That Have Stopped Due To Errors"
+                                         allow-collapse="true"></div>
+                                    <div class="widget-content">
+                                        <ul>
+                                            <li>some data</li>
+                                        </ul>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div data-cc-widget-header title="File Errors"
+                                         allow-collapse="true"></div>
+                                    <div class="widget-content">
+                                        <ul>
+                                            <li>some data</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                <div class="widget-foot">
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </section>
+</section>
+
