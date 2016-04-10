@@ -134,6 +134,8 @@
         vm.getTaskContact = getTaskContact;
         vm.getTaskAttempt = getTaskAttempt;
         vm.updateTrialStatus = updateTrialStatus;
+        vm.updateImportantNotes = updateImportantNotes;
+        vm.getImportantNotes = getImportantNotes();
         vm.nameTemplate = '<div class="ngCellText"><a href=#/admin/Principal/LastName/{{row.getProperty(col.field)}}/FirstName/{{row.getProperty("FirstName")}}/TrialSiteId/{{row.getProperty("TrialSite_ID")}}>{{row.getProperty("FirstName")}} {{row.getProperty(col.field)}}</a></div>';
         vm.dateTemplate = '<div class="ngCellText">{{ (row.getProperty(col.field)) | date : "shortDate" }}</div>';
         vm.noteTemplate = '<div class="ngCellText wordWrap">{{row.getProperty(col.field)}}</div>';
@@ -255,7 +257,24 @@
                 } else {
                     return vm.taskAttempt = 1;
                 }
-            })
+            });
+        }
+
+        function updateImportantNotes() {
+            // this function will handle updating the important notes field
+            vm.query = '';
+            return datacontext.runAdhocQuery(vm.query).then(function(result){
+
+            });
+        }
+
+        function getImportantNotes() {
+            // this function will handle getting the latest important notes
+            //vm.TaskImportantNotes = result.data.responseData[1].Task_ImportantNotes;
+            vm.query = '';
+            return datacontext.runAdhocQuery(vm.query).then(function(result){
+
+            });
         }
 
         function getFacilityInformation() {
@@ -473,7 +492,7 @@
             return datacontext.runAdhocQuery(vm.query).then(function (result) {
                 // get the task important notes from the latest entry
                 if (result.data.responseData.length>1){
-                    vm.TaskImportantNotes = result.data.responseData[1].Task_ImportantNotes;
+                    //vm.TaskImportantNotes = result.data.responseData[1].Task_ImportantNotes;
                     //vm.fillTaskObject(result.data.responseData[0]);
                     console.log(result.data.responseData);
                 }
