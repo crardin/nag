@@ -17,8 +17,9 @@
         vm.people = [];
         vm.title = 'Dashboard';
         vm.credentials = {};
-        vm.credentials.username = 'guest';
-        vm.credentials.password = 'guestpass';
+        // should be grabbing this from the form
+        vm.credentials.username = 'Karen';
+        vm.credentials.password = 'B0hr!sBorin8';
 
         activate();
 
