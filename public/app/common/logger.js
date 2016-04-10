@@ -53,6 +53,7 @@
             var write = (toastType === 'error') ? $log.error : $log.log;
             source = source ? '[' + source + '] ' : '';
             write(source, message, data);
+            showToast = false;
             if (showToast) {
                 if (toastType === 'error') {
                     toastr.error(message);
