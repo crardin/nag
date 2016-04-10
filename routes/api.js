@@ -4,7 +4,9 @@
 
 var neo4j = require('neo4j-js');
 var async = require('async');
-var neo4JUrl = 'http://interactions:C0z0OZ70Oh7MriQHeNB5@interactions.sb02.stations.graphenedb.com:24789/db/data/';
+//var neo4JUrl = 'http://interactions:C0z0OZ70Oh7MriQHeNB5@interactions.sb02.stations.graphenedb.com:24789/db/data/';
+var neo4JUrl = 'http://localhost:7474/db/data/';
+//var neo4JUrl = 'http://96.127.183.102:7474/db/data/';
 var passport = require('passport');
 var jwt = require('jsonwebtoken');
 
@@ -32,7 +34,7 @@ exports.signin = function(req, res, next) {
 };
 
 exports.createNode = function (req, res) {
-    //JSON. stringify is only available in mordern browers.....
+    //JSON. stringify is only available in modern browsers.....
 
     var node = req.body.node;
     //var retValue = '', error = '';
