@@ -40,14 +40,7 @@
                                             {{vm.trial.TaskNumber || 'None Assigned'}}</a>
                                         </div>
                                     </div>
-                                    <div>
-                                        <h5>Important Notes</h5>
-                                        <textarea class="form-control" rows=5
-                                                  ng-model="vm.TaskImportantNotes"></textarea>
-                                        <button class="btn btn-success" ng-click="vm.updateImportantNotes()">
-                                            Update Important Notes
-                                        </button>
-                                    </div>
+
                                 </div>
                             </div>
                             <div class="col-md-6">
@@ -237,7 +230,12 @@
                                         </div>
                                     </div>
                                     </div>
-                                    <div class="col-md-12">
+                                    <div class="col-md-6">
+                                        <h5>Important Notes</h5>
+                                            <textarea class="form-control" rows=5
+                                                  ng-model="vm.TaskImportantNotes"></textarea>
+                                    </div>
+                                    <div class="col-md-6">
                                         <h5>Associated Trials</h5>
                                         <table class="table">
                                             <tr class="headerRow">
