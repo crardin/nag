@@ -111,7 +111,7 @@
 
         function getStudy(username){
             // function to get a single studies information
-            vm.query = 'MATCH (CS: CSR {CSR_Owner:"' + username + '"})-[:ASSIGNED_PI]->(PI)-[:RUNS_TRIAL]->(TS)<-[:HAS_SITE]-(S)<-[:SPONSORS]-(SP) WHERE S.Study_ID="' + vm.studyId + '"RETURN DISTINCT SP.Sponsor AS Sponsor, S.Study_ID AS Study_ID, S.Study_Name AS Study_Name, TS.TrialSite_ProcessingQuarter AS Processing_Quarter, S.Study_Status AS Status';
+            vm.query = 'MATCH (CS: CSR {CSR_Owner:"' + username + '"})-[:ASSIGNED_PI]->(PI)-[:RUNS_TRIAL]->(TS)<-[:HAS_SITE]-(S)<-[:SPONSORS]-(SP) WHERE S.Study_ID="' + vm.studyId + '"RETURN DISTINCT SP.Sponsor AS Sponsor, S.Study_ID AS Study_ID, S.Study_Name AS Study_Name, S.Study_Status AS Status';
             return datacontext.runAdhocQuery(vm.query).then(function(result){
                 return vm.studynodes = result.data.responseData;
             });
@@ -119,7 +119,7 @@
 
         function getStudies(username){
             // function to return all the studies for a given user
-            vm.query = 'MATCH (CS: CSR {CSR_Owner:"' + username + '"})-[:ASSIGNED_PI]->(PI)-[:RUNS_TRIAL]->(TS)<-[:HAS_SITE]-(S)<-[:SPONSORS]-(SP) RETURN DISTINCT SP.Sponsor AS Sponsor, S.Study_ID AS Study_ID, S.Study_Name AS Study_Name, TS.TrialSite_ProcessingQuarter AS Processing_Quarter, S.Study_Status AS Status';
+            vm.query = 'MATCH (CS: CSR {CSR_Owner:"' + username + '"})-[:ASSIGNED_PI]->(PI)-[:RUNS_TRIAL]->(TS)<-[:HAS_SITE]-(S)<-[:SPONSORS]-(SP) RETURN DISTINCT SP.Sponsor AS Sponsor, S.Study_ID AS Study_ID, S.Study_Name AS Study_Name, S.Study_Status AS Status';
             return datacontext.runAdhocQuery(vm.query).then(function(result){
                 return vm.studynodes = result.data.responseData;
             });
@@ -127,8 +127,8 @@
 
         function showTrials(studyId){
             // function to show the trials for the clicked study id
-            console.log("showTrials");
             vm.query = 'MATCH (SP)-[:SPONSORS]->(S)-[:HAS_SITE]->(TS)<-[:RUNS_TRIAL]-(PI)<-[:HAS_INVESTIGATOR]-(F) WHERE S.Study_ID="' + studyId + '" Return SP.Sponsor AS Sponsor,S.Study_ID AS Study_ID,TS.TrialSite_ID AS TrialSite_ID, F.Facility_Name AS Facility_Name, PI.PI_LastName AS LastName, PI.PI_FirstName AS FirstName, TS.TrialSite_Stage AS Stage, TS.TrialSite_Contacted AS Contacted, TS.TrialSite_NumberOfSubjects AS NumberOfSubjects';
+            console.log(vm.query);
             return datacontext.runAdhocQuery(vm.query).then(function(result){
                 return vm.trialnodes = result.data.responseData;
             });
