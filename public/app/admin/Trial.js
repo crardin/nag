@@ -249,14 +249,13 @@
         }
 
         function getTaskAttempt() {
-            vm.query = 'MATCH (PI)-[:RUNS_TRIAL]->(TS)<-[NTR:TASK_RELATES_TO]-(TK) WHERE PI.PI_FirstName="' + vm.firstname + '" AND PI.PI_LastName="' + vm.lastname + '" AND TS.TrialSite_ID="' + vm.trialId + '" RETURN MAX(TOINT(NTR.Task_Attempt)) AS Task_Attempt';
+            //vm.query = 'MATCH (PI)-[:RUNS_TRIAL]->(TS)<-[NTR:TASK_RELATES_TO]-(TK) WHERE PI.PI_FirstName="' + vm.firstname + '" AND PI.PI_LastName="' + vm.lastname + '" AND TS.TrialSite_ID="' + vm.trialId + '" RETURN MAX(TOINT(NTR.Task_Attempt)) AS Task_Attempt';
+            vm.query = 'MATCH (S)-[:HAS_SITE]->(TS)-[NTR:TASK_RELATES_TO]-(TK) WHERE S.Study_ID = "' + vm.studyId + '" AND TS.TrialSite_ID="' + vm.trialId + '" RETURN max(toInt(TK.Task_Attempt))';
             console.log(vm.query);
             return datacontext.runAdhocQuery(vm.query).then(function(result){
                 if (result.data.responseData.length>0) {
                     return vm.taskAttempt = result.data.responseData[0].Task_Attempt;
-                } else {
-                    return vm.taskAttempt = 1;
-                }
+                } else return vm.taskAttempt = 1;
             });
         }
 
